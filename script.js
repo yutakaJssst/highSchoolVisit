@@ -2,23 +2,24 @@ const siteData = {
   schoolName: "千葉県立千葉西高等学校",
   shortName: "千葉西高校",
   area: "海に近い、検見川浜のそばの全日制普通科",
-  tagline: "生徒が教えてくれた魅力は「海が近い」。自立と挑戦の力を育てる学校。",
+  tagline: "生徒が教えてくれた千葉西のよさ。それは「海が近い」こと。",
   theme: {
-    brand: "#246bfe",
-    accent: "#ff6b5f",
-    mint: "#30c6a7",
-    gold: "#f8c14a"
+    brand: "#0077b6",
+    accent: "#f07167",
+    mint: "#2ec4b6",
+    gold: "#f7b801",
+    sand: "#f4dfb8"
   },
   stats: [
+    { value: "海近く", label: "生徒の推しポイント" },
     { value: "飛翔", label: "校訓" },
-    { value: "普通科", label: "全日制の課程" },
     { value: "徒歩15分", label: "検見川浜駅から" }
   ],
   features: [
     {
       symbol: "01",
-      title: "生徒が教えてくれた「海が近い」",
-      body: "千葉市美浜区磯辺、検見川浜の近く。海を身近に感じられる環境が、千葉西高校らしい魅力の一つです。"
+      title: "毎日に海がある",
+      body: "生徒が教えてくれた千葉西高校のよさは「海が近い」こと。海を身近に感じられる環境が、学校の印象をひらいてくれます。"
     },
     {
       symbol: "02",
@@ -41,7 +42,7 @@ const siteData = {
       initial: "海",
       name: "生徒が教えてくれたよさ",
       role: "海が近い",
-      quote: "千葉西高校のよさとして、生徒から「海が近い」という声がありました。"
+      quote: "千葉西高校のよさとして、生徒から「海が近い」という声がありました。学校紹介の中心にしたい一言です。"
     },
     {
       initial: "B",
@@ -74,13 +75,13 @@ const siteData = {
     }
   ],
   game: {
-    title: "通学路ダッシュ",
-    body: "検見川浜駅から千葉西高校まで、徒歩15分の道のりをイメージしたミニゲームです。",
+    title: "海風ルートダッシュ",
+    body: "検見川浜駅から海風を感じながら、千葉西高校まで向かうミニゲームです。",
     playerLabel: "AI",
     startLabel: "検見川浜駅",
     goalLabel: "千葉西高校",
     routeNote: "JR京葉線 検見川浜駅から徒歩15分",
-    routeItems: ["海近く", "飛翔", "高大連携", "部活動"],
+    routeItems: ["海風", "飛翔", "高大連携", "部活動"],
     obstacles: ["信号", "向かい風", "寄り道"]
   }
 };
@@ -91,6 +92,7 @@ root.style.setProperty("--brand-dark", shadeColor(siteData.theme.brand, -28));
 root.style.setProperty("--accent", siteData.theme.accent);
 root.style.setProperty("--mint", siteData.theme.mint);
 root.style.setProperty("--gold", siteData.theme.gold);
+root.style.setProperty("--sand", siteData.theme.sand);
 
 const textBindings = [
   ["[data-school-name]", siteData.schoolName],
@@ -224,9 +226,9 @@ function initCampusCanvas() {
 
 function drawSky(ctx, width, height) {
   const sky = ctx.createLinearGradient(0, 0, 0, height);
-  sky.addColorStop(0, "#bce8ff");
-  sky.addColorStop(0.62, "#e9f9ff");
-  sky.addColorStop(1, "#ffffff");
+  sky.addColorStop(0, "#b9ecff");
+  sky.addColorStop(0.45, "#e7f9ff");
+  sky.addColorStop(1, "#fff8eb");
   ctx.fillStyle = sky;
   ctx.fillRect(0, 0, width, height);
 }
@@ -271,28 +273,57 @@ function drawClouds(ctx, width, height, t, pointerX) {
 }
 
 function drawGround(ctx, width, height) {
-  const groundY = height * 0.72;
-  ctx.fillStyle = "#dff8ed";
-  ctx.fillRect(0, groundY, width, height - groundY);
+  const horizonY = height * 0.56;
+  const beachY = height * 0.76;
 
-  ctx.fillStyle = "#9bd9bb";
-  for (let x = -40; x < width + 80; x += 78) {
+  const sea = ctx.createLinearGradient(0, horizonY, 0, beachY);
+  sea.addColorStop(0, "#84d9f2");
+  sea.addColorStop(0.56, "#2ec4b6");
+  sea.addColorStop(1, "#d8f7ee");
+  ctx.fillStyle = sea;
+  ctx.fillRect(0, horizonY, width, beachY - horizonY);
+
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.78)";
+  ctx.lineWidth = 3;
+  for (let y = horizonY + 24; y < beachY - 12; y += 34) {
     ctx.beginPath();
-    ctx.moveTo(x, height);
-    ctx.quadraticCurveTo(x + 36, groundY + 34, x + 88, height);
-    ctx.closePath();
-    ctx.fill();
+    for (let x = -20; x <= width + 20; x += 28) {
+      const waveY = y + Math.sin((x + y) * 0.025) * 4;
+      if (x === -20) {
+        ctx.moveTo(x, waveY);
+      } else {
+        ctx.lineTo(x, waveY);
+      }
+    }
+    ctx.stroke();
   }
 
-  ctx.fillStyle = "rgba(36, 107, 254, 0.12)";
-  ctx.fillRect(0, groundY + 18, width, 4);
+  const sand = ctx.createLinearGradient(0, beachY, 0, height);
+  sand.addColorStop(0, "#fff0c8");
+  sand.addColorStop(1, siteData.theme.sand);
+  ctx.fillStyle = sand;
+  ctx.fillRect(0, beachY, width, height - beachY);
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
+  ctx.beginPath();
+  ctx.moveTo(0, beachY + 4);
+  for (let x = 0; x <= width + 20; x += 36) {
+    ctx.quadraticCurveTo(x + 18, beachY + 17, x + 36, beachY + 5);
+  }
+  ctx.lineTo(width, beachY + 32);
+  ctx.lineTo(0, beachY + 32);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(0, 119, 182, 0.12)";
+  ctx.fillRect(0, beachY + 50, width, 5);
 }
 
 function drawCampus(ctx, width, height, pointer) {
-  const baseY = height * 0.72;
-  const buildingW = Math.min(width * 0.5, 720);
-  const buildingH = Math.min(height * 0.32, 280);
-  const x = width * 0.53 + (pointer.x - 0.5) * 18;
+  const baseY = height * 0.77;
+  const buildingW = Math.min(width * 0.38, 560);
+  const buildingH = Math.min(height * 0.24, 220);
+  const x = width * 0.64 + (pointer.x - 0.5) * 18;
   const y = baseY - buildingH;
   const left = x - buildingW / 2;
 
@@ -332,6 +363,12 @@ function drawCampus(ctx, width, height, pointer) {
   ctx.fillStyle = siteData.theme.accent;
   roundRect(ctx, left + buildingW * 0.45, baseY - buildingH * 0.21, buildingW * 0.1, buildingH * 0.21, 6);
   ctx.fill();
+
+  ctx.fillStyle = "rgba(23, 32, 51, 0.72)";
+  ctx.font = `900 ${Math.max(13, buildingW * 0.032)}px system-ui, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("千葉西高校", left + buildingW * 0.5, y + buildingH * 0.12);
 
   drawTree(ctx, left - 70, baseY + 4, 1.2);
   drawTree(ctx, left + buildingW + 62, baseY + 8, 1.05);
@@ -552,32 +589,32 @@ function initGame() {
 function drawGame(ctx, canvas, state) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  sky.addColorStop(0, "#dff4ff");
-  sky.addColorStop(0.58, "#f8fcff");
-  sky.addColorStop(1, "#ffffff");
+  sky.addColorStop(0, "#d9f5ff");
+  sky.addColorStop(0.55, "#fbfeff");
+  sky.addColorStop(1, "#fff2cf");
   ctx.fillStyle = sky;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   drawRouteBackground(ctx, canvas, state);
   drawRouteProgress(ctx, canvas, state);
 
-  ctx.fillStyle = "#caefdc";
+  ctx.fillStyle = siteData.theme.sand;
   ctx.fillRect(0, state.ground, canvas.width, canvas.height - state.ground);
 
-  ctx.strokeStyle = "rgba(23, 32, 51, 0.2)";
+  ctx.strokeStyle = "rgba(23, 32, 51, 0.18)";
   ctx.lineWidth = 4;
   ctx.beginPath();
   ctx.moveTo(0, state.ground);
   ctx.lineTo(canvas.width, state.ground);
   ctx.stroke();
 
-  ctx.fillStyle = "rgba(36, 107, 254, 0.08)";
-  ctx.fillRect(0, state.ground + 70, canvas.width, 24);
+  ctx.fillStyle = "rgba(0, 119, 182, 0.18)";
+  ctx.fillRect(0, state.ground + 70, canvas.width, 34);
   for (let x = -60; x < canvas.width + 80; x += 46) {
     const waveX = x - ((state.frame * 0.55) % 46);
     ctx.beginPath();
     ctx.arc(waveX, state.ground + 82, 18, 0, Math.PI);
-    ctx.strokeStyle = "rgba(36, 107, 254, 0.22)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.72)";
     ctx.lineWidth = 2;
     ctx.stroke();
   }
@@ -628,21 +665,21 @@ function drawGame(ctx, canvas, state) {
 }
 
 function drawRouteBackground(ctx, canvas, state) {
-  ctx.fillStyle = "rgba(36, 107, 254, 0.12)";
+  ctx.fillStyle = "rgba(0, 119, 182, 0.12)";
   for (let i = 0; i < 5; i += 1) {
     const x = ((i * 220 - state.frame * 0.8) % 1120) - 120;
     roundRect(ctx, x, 82 + i * 11, 110, 34, 18);
     ctx.fill();
   }
 
-  ctx.fillStyle = "rgba(48, 198, 167, 0.22)";
+  ctx.fillStyle = "rgba(46, 196, 182, 0.28)";
   roundRect(ctx, 36, 204, 120, 56, 8);
   ctx.fill();
   ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
   roundRect(ctx, 54, 220, 84, 8, 4);
   ctx.fill();
 
-  ctx.fillStyle = "rgba(248, 193, 74, 0.28)";
+  ctx.fillStyle = "rgba(247, 184, 1, 0.3)";
   roundRect(ctx, canvas.width - 174, 196, 128, 74, 8);
   ctx.fill();
   ctx.fillStyle = "rgba(23, 32, 51, 0.12)";
@@ -650,6 +687,12 @@ function drawRouteBackground(ctx, canvas, state) {
     roundRect(ctx, canvas.width - 154 + i * 28, 215, 16, 16, 4);
     ctx.fill();
   }
+
+  ctx.fillStyle = "rgba(0, 119, 182, 0.72)";
+  ctx.font = "900 16px system-ui, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText("海風", 42, 190);
 }
 
 function drawRouteProgress(ctx, canvas, state) {
