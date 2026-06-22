@@ -472,6 +472,43 @@ h3 {
   color: rgba(247, 251, 255, 0.76);
 }
 
+.station-section {
+  background: #ffffff;
+}
+
+.station-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+
+.station-layout p {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.station-photo {
+  margin: 0;
+  min-width: 0;
+}
+
+.station-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.station-photo figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .game-section {
   background: #f7fbff;
 }
@@ -576,6 +613,7 @@ h3 {
   .feature-grid,
   .voice-grid,
   .split-layout,
+  .station-layout,
   .game-layout {
     grid-template-columns: 1fr;
   }
