@@ -1,6 +1,6 @@
 const siteData = {
-  schoolName: "青空未来高等学校",
-  shortName: "青空未来高校",
+  schoolName: "千葉県立千葉西高校",
+  shortName: "千葉県立千葉西高校",
   area: "地域とつながる学び",
   tagline: "好奇心を、地域とテクノロジーで未来につなげる学校。",
   theme: {
