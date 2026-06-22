@@ -74,11 +74,14 @@ const siteData = {
     }
   ],
   game: {
-    title: "Hisho Dash",
-    body: "校訓「飛翔」に合わせて、ひらめきを集めながら未来へ進むミニゲームです。",
+    title: "通学路ダッシュ",
+    body: "検見川浜駅から千葉西高校まで、徒歩15分の道のりをイメージしたミニゲームです。",
     playerLabel: "AI",
-    collectibleLabel: "idea",
-    obstacleLabel: "deadline"
+    startLabel: "検見川浜駅",
+    goalLabel: "千葉西高校",
+    routeNote: "JR京葉線 検見川浜駅から徒歩15分",
+    routeItems: ["朝読書", "飛翔", "高大連携", "部活動"],
+    obstacles: ["信号", "向かい風", "寄り道"]
   }
 };
 
@@ -383,15 +386,18 @@ function initGame() {
   const jumpButton = document.querySelector("[data-jump]");
   const scoreElement = document.querySelector("[data-score]");
   const bestElement = document.querySelector("[data-best-score]");
-  const bestKey = "high-school-visit-best-score";
+  const bestKey = "high-school-visit-route-best-score";
 
   const state = {
     running: false,
     gameOver: false,
+    arrived: false,
     score: 0,
     best: Number(localStorage.getItem(bestKey) || 0),
     speed: 4.8,
     frame: 0,
+    distance: 0,
+    finishDistance: 2600,
     ground: 330,
     player: {
       x: 104,
@@ -410,9 +416,11 @@ function initGame() {
   const reset = () => {
     state.running = true;
     state.gameOver = false;
+    state.arrived = false;
     state.score = 0;
     state.speed = 4.8;
     state.frame = 0;
+    state.distance = 0;
     state.obstacles = [];
     state.collectibles = [];
     state.player.y = state.ground - state.player.height;
@@ -423,7 +431,7 @@ function initGame() {
   };
 
   const jump = () => {
-    if (!state.running || state.gameOver) {
+    if (!state.running || state.gameOver || state.arrived) {
       reset();
       return;
     }
@@ -458,8 +466,14 @@ function initGame() {
 
     game.frame += 1;
     game.score += 1;
+    game.distance += game.speed;
     game.speed = Math.min(11, game.speed + 0.0028);
     scoreElement.textContent = Math.floor(game.score / 6);
+
+    if (game.distance >= game.finishDistance) {
+      arriveGame(game);
+      return;
+    }
 
     game.player.velocityY += 0.74;
     game.player.y += game.player.velocityY;
@@ -471,21 +485,23 @@ function initGame() {
       game.player.grounded = true;
     }
 
-    if (game.frame % 96 === 0) {
+    if (game.frame % 96 === 0 && routeProgress(game) < 0.92) {
       game.obstacles.push({
         x: canvas.width + 28,
         y: game.ground - 42,
         width: 42,
-        height: 42
+        height: 42,
+        label: pick(siteData.game.obstacles, game.frame / 96)
       });
     }
 
-    if (game.frame % 74 === 0) {
+    if (game.frame % 74 === 0 && routeProgress(game) < 0.95) {
       game.collectibles.push({
         x: canvas.width + 34,
         y: game.ground - 118 - Math.random() * 88,
         radius: 16,
-        collected: false
+        collected: false,
+        label: pick(siteData.game.routeItems, game.frame / 74)
       });
     }
 
@@ -518,22 +534,32 @@ function initGame() {
       bestElement.textContent = game.best;
     }
   }
+
+  function arriveGame(game) {
+    game.arrived = true;
+    game.running = false;
+    game.score += 240;
+    const finalScore = Math.floor(game.score / 6);
+    scoreElement.textContent = finalScore;
+    if (finalScore > game.best) {
+      game.best = finalScore;
+      localStorage.setItem(bestKey, String(game.best));
+      bestElement.textContent = game.best;
+    }
+  }
 }
 
 function drawGame(ctx, canvas, state) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
   sky.addColorStop(0, "#dff4ff");
-  sky.addColorStop(1, "#f8fcff");
+  sky.addColorStop(0.58, "#f8fcff");
+  sky.addColorStop(1, "#ffffff");
   ctx.fillStyle = sky;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(36, 107, 254, 0.11)";
-  for (let i = 0; i < 5; i += 1) {
-    const x = ((i * 220 - state.frame * 0.8) % 1120) - 120;
-    roundRect(ctx, x, 96 + i * 10, 110, 34, 18);
-    ctx.fill();
-  }
+  drawRouteBackground(ctx, canvas, state);
+  drawRouteProgress(ctx, canvas, state);
 
   ctx.fillStyle = "#caefdc";
   ctx.fillRect(0, state.ground, canvas.width, canvas.height - state.ground);
@@ -544,6 +570,17 @@ function drawGame(ctx, canvas, state) {
   ctx.moveTo(0, state.ground);
   ctx.lineTo(canvas.width, state.ground);
   ctx.stroke();
+
+  ctx.fillStyle = "rgba(36, 107, 254, 0.08)";
+  ctx.fillRect(0, state.ground + 70, canvas.width, 24);
+  for (let x = -60; x < canvas.width + 80; x += 46) {
+    const waveX = x - ((state.frame * 0.55) % 46);
+    ctx.beginPath();
+    ctx.arc(waveX, state.ground + 82, 18, 0, Math.PI);
+    ctx.strokeStyle = "rgba(36, 107, 254, 0.22)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
 
   for (let x = -80; x < canvas.width + 120; x += 90) {
     const laneX = x - ((state.frame * state.speed) % 90);
@@ -558,32 +595,136 @@ function drawGame(ctx, canvas, state) {
     ctx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = "#172033";
-    ctx.font = "700 12px system-ui, sans-serif";
+    ctx.font = "900 11px system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("+", item.x, item.y + 1);
+    ctx.font = "800 11px system-ui, sans-serif";
+    ctx.fillText(item.label, item.x, item.y - 25);
   });
 
   state.obstacles.forEach((obstacle) => {
     ctx.fillStyle = siteData.theme.accent;
     roundRect(ctx, obstacle.x, obstacle.y, obstacle.width, obstacle.height, 8);
     ctx.fill();
-    ctx.fillStyle = "rgba(23, 32, 51, 0.82)";
-    ctx.font = "800 15px system-ui, sans-serif";
+    ctx.fillStyle = "#fff";
+    ctx.font = "900 12px system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("!", obstacle.x + obstacle.width / 2, obstacle.y + obstacle.height / 2 + 1);
+    ctx.fillText("!", obstacle.x + obstacle.width / 2, obstacle.y + 14);
+    ctx.font = "800 10px system-ui, sans-serif";
+    ctx.fillText(obstacle.label, obstacle.x + obstacle.width / 2, obstacle.y + 30);
   });
 
   drawPlayer(ctx, state.player);
 
   if (!state.running && !state.gameOver) {
-    drawCenterLabel(ctx, canvas, "START");
+    drawCenterLabel(ctx, canvas, state.arrived ? "ARRIVED" : "START");
   }
 
   if (state.gameOver) {
     drawCenterLabel(ctx, canvas, "RETRY");
   }
+}
+
+function drawRouteBackground(ctx, canvas, state) {
+  ctx.fillStyle = "rgba(36, 107, 254, 0.12)";
+  for (let i = 0; i < 5; i += 1) {
+    const x = ((i * 220 - state.frame * 0.8) % 1120) - 120;
+    roundRect(ctx, x, 82 + i * 11, 110, 34, 18);
+    ctx.fill();
+  }
+
+  ctx.fillStyle = "rgba(48, 198, 167, 0.22)";
+  roundRect(ctx, 36, 204, 120, 56, 8);
+  ctx.fill();
+  ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
+  roundRect(ctx, 54, 220, 84, 8, 4);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(248, 193, 74, 0.28)";
+  roundRect(ctx, canvas.width - 174, 196, 128, 74, 8);
+  ctx.fill();
+  ctx.fillStyle = "rgba(23, 32, 51, 0.12)";
+  for (let i = 0; i < 4; i += 1) {
+    roundRect(ctx, canvas.width - 154 + i * 28, 215, 16, 16, 4);
+    ctx.fill();
+  }
+}
+
+function drawRouteProgress(ctx, canvas, state) {
+  const x = 58;
+  const y = 28;
+  const width = canvas.width - 116;
+  const height = 96;
+  const progress = routeProgress(state);
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
+  roundRect(ctx, x, y, width, height, 8);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(23, 32, 51, 0.14)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  const routeY = y + 52;
+  const startX = x + 66;
+  const goalX = x + width - 72;
+  const currentX = startX + (goalX - startX) * progress;
+
+  ctx.strokeStyle = "rgba(23, 32, 51, 0.2)";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(startX, routeY);
+  ctx.bezierCurveTo(x + width * 0.34, routeY - 28, x + width * 0.56, routeY + 28, goalX, routeY);
+  ctx.stroke();
+
+  ctx.strokeStyle = siteData.theme.brand;
+  ctx.lineWidth = 7;
+  ctx.beginPath();
+  ctx.moveTo(startX, routeY);
+  ctx.lineTo(currentX, routeY);
+  ctx.stroke();
+
+  drawMapPin(ctx, startX, routeY, siteData.theme.brand, siteData.game.startLabel);
+  drawMapPin(ctx, goalX, routeY, siteData.theme.accent, siteData.game.goalLabel);
+
+  ctx.fillStyle = siteData.theme.gold;
+  ctx.beginPath();
+  ctx.arc(currentX, routeY, 13, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#172033";
+  ctx.font = "900 11px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("GO", currentX, routeY + 1);
+
+  ctx.fillStyle = "#5e6878";
+  ctx.font = "800 13px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText(siteData.game.routeNote, x + width / 2, y + height - 15);
+
+  ctx.fillStyle = "#172033";
+  ctx.font = "900 16px system-ui, sans-serif";
+  ctx.textAlign = "right";
+  ctx.fillText(`${Math.round(progress * 100)}%`, x + width - 16, y + 24);
+}
+
+function drawMapPin(ctx, x, y, color, label) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(x, y, 14, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#fff";
+  ctx.beginPath();
+  ctx.arc(x, y, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#172033";
+  ctx.font = "900 12px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText(label, x, y - 22);
 }
 
 function drawPlayer(ctx, player) {
@@ -644,6 +785,14 @@ function shadeColor(hex, percent) {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function routeProgress(state) {
+  return clamp(state.distance / state.finishDistance, 0, 1);
+}
+
+function pick(items, index) {
+  return items[Math.floor(index) % items.length];
 }
 
 function roundRect(ctx, x, y, width, height, radius) {
