@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="高校説明会でAIと一緒に即興で作る、GitHub Pages対応の学校紹介Webサイト。"
+      content="出張講義でAIと一緒に即興で作る、GitHub Pages対応の学校紹介Webサイト。"
     />
-    <title>AIと作る高校紹介サイト</title>
+    <title>AIと作る学校紹介サイト</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header" aria-label="サイトヘッダー">
       <a class="brand" href="#top" aria-label="トップへ戻る">
         <span class="brand-mark" aria-hidden="true">AI</span>
-        <span data-school-name-short>高校紹介サイト</span>
+        <span data-school-name-short>学校紹介サイト</span>
       </a>
       <nav class="main-nav" aria-label="メインナビゲーション">
         <a href="#features">魅力</a>
-        <a href="#sea">海</a>
+        <a href="#spirit">校訓</a>
         <a href="#voices">生活</a>
         <a href="#events">行事</a>
         <a href="#game">ゲーム</a>
@@ -30,10 +30,10 @@
         <canvas id="campusCanvas" class="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow" data-school-area>海に近い、検見川浜のそばの全日制普通科</p>
-          <h1 id="hero-title" data-school-name>千葉県立千葉西高等学校</h1>
+          <p class="eyebrow" data-school-area>緑豊かな習志野台にある、日本大学の特別付属校</p>
+          <h1 id="hero-title" data-school-name>千葉日本大学第一中学校</h1>
           <p class="hero-lead" data-school-tagline>
-            生徒が教えてくれた千葉西のよさ。それは「海が近い」こと。
+            校訓は「真・健・和」。まっ直ぐに、すこやかに、なごやかに。
           </p>
           <div class="hero-actions" aria-label="主要リンク">
             <a class="button primary" href="#features">魅力を見る</a>
@@ -44,16 +44,16 @@
 
       <section class="quick-stats" aria-label="学校の特徴">
         <div class="stat">
-          <span class="stat-value" data-stat-value="0">海近く</span>
-          <span class="stat-label" data-stat-label="0">生徒の推しポイント</span>
+          <span class="stat-value" data-stat-value="0">真・健・和</span>
+          <span class="stat-label" data-stat-label="0">校訓</span>
         </div>
         <div class="stat">
-          <span class="stat-value" data-stat-value="1">飛翔</span>
-          <span class="stat-label" data-stat-label="1">校訓</span>
+          <span class="stat-value" data-stat-value="1">徒歩12分</span>
+          <span class="stat-label" data-stat-label="1">船橋日大前駅から</span>
         </div>
         <div class="stat">
-          <span class="stat-value" data-stat-value="2">徒歩15分</span>
-          <span class="stat-label" data-stat-label="2">検見川浜駅から</span>
+          <span class="stat-value" data-stat-value="2">習陵祭</span>
+          <span class="stat-label" data-stat-label="2">体育祭と文化祭</span>
         </div>
       </section>
 
@@ -61,21 +61,21 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">School Highlights</p>
-            <h2 id="features-title">千葉西高校の魅力は、海の近さから始まる。</h2>
+            <h2 id="features-title">千葉日大一中の魅力は、緑のキャンパスから始まる。</h2>
           </div>
           <div class="feature-grid" data-feature-grid></div>
         </div>
       </section>
 
-      <section id="sea" class="section sea-voice-section" aria-labelledby="sea-title">
-        <div class="section-inner sea-voice-layout">
+      <section id="spirit" class="section spirit-section" aria-labelledby="spirit-title">
+        <div class="section-inner spirit-layout">
           <div>
-            <p class="eyebrow">Student Voice</p>
-            <h2 id="sea-title">生徒に聞いた千葉西高校のよさ</h2>
+            <p class="eyebrow">School Motto</p>
+            <h2 id="spirit-title">千葉日大一中の3つの言葉</h2>
           </div>
-          <blockquote class="sea-quote">
-            <p>海が近い。</p>
-            <cite>説明会で生徒から出た、千葉西高校らしさを表す一言</cite>
+          <blockquote class="spirit-quote">
+            <p>真・健・和</p>
+            <cite>まっ直ぐに、すこやかに、なごやかに。毎日の合言葉です。</cite>
           </blockquote>
         </div>
       </section>
@@ -84,23 +84,23 @@
         <div class="section-inner split-layout">
           <div>
             <p class="eyebrow">Learning Style</p>
-            <h2 id="learning-title" data-learning-title>自立と挑戦を育てる、千葉西の学び。</h2>
+            <h2 id="learning-title" data-learning-title>6年間でじっくり育てる、千葉日大一中の学び。</h2>
             <p data-learning-body>
-              朝の読書活動、大学との連携、地域との交流を通して、自分で考え行動する力を育てます。
+              中高一貫だからできる、基礎から積み上げる学習。日本大学との連携で、将来の学びにも早くから触れられます。
             </p>
           </div>
           <div class="activity-board" aria-label="学びのテーマ">
             <div class="activity-row">
-              <span>情報</span>
-              <strong data-activity="0">朝読書</strong>
+              <span>学び</span>
+              <strong data-activity="0">中高一貫</strong>
             </div>
             <div class="activity-row">
-              <span>探究</span>
-              <strong data-activity="1">高大連携</strong>
+              <span>連携</span>
+              <strong data-activity="1">日大連携</strong>
             </div>
             <div class="activity-row">
-              <span>表現</span>
-              <strong data-activity="2">地域交流</strong>
+              <span>行事</span>
+              <strong data-activity="2">習陵祭</strong>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">School Life</p>
-            <h2 id="voices-title">千葉西高校の学びと生活</h2>
+            <h2 id="voices-title">千葉日大一中の学びと生活</h2>
           </div>
           <div class="voice-grid" data-voice-grid></div>
         </div>
@@ -130,22 +130,27 @@
         <div class="section-inner station-layout">
           <div>
             <p class="eyebrow">Route Start</p>
-            <h2 id="station-title">通学路は検見川浜駅から。</h2>
+            <h2 id="station-title">通学路は船橋日大前駅から。</h2>
             <p>
-              JR京葉線の検見川浜駅から千葉西高校までは徒歩15分。次のゲームでは、
-              この駅をスタート地点にして学校までの道のりをたどります。
+              東葉高速線の船橋日大前駅から千葉日大一中までは徒歩約12分。日本大学理工学部の
+              キャンパスを通り抜ける、緑いっぱいの通学路です。次のゲームでは、この駅を
+              スタート地点にして学校までの道のりをたどります。
             </p>
           </div>
-          <figure class="station-photo">
-            <img
-              src="assets/photos/kemigawahama-station.jpg"
-              alt="検見川浜駅の駅舎"
-              width="1800"
-              height="819"
-              loading="lazy"
-            />
-            <figcaption>JR京葉線 検見川浜駅</figcaption>
-          </figure>
+          <div class="activity-board" aria-label="アクセス">
+            <div class="activity-row">
+              <span>電車</span>
+              <strong>船橋日大前駅から徒歩約12分</strong>
+            </div>
+            <div class="activity-row">
+              <span>電車</span>
+              <strong>習志野駅から徒歩約20分</strong>
+            </div>
+            <div class="activity-row">
+              <span>バス</span>
+              <strong>北習志野駅からバスも利用可</strong>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -153,9 +158,9 @@
         <div class="section-inner game-layout">
           <div class="game-copy">
             <p class="eyebrow">Mini Game</p>
-            <h2 id="game-title" data-game-title>海風ルートダッシュ</h2>
+            <h2 id="game-title" data-game-title>キャンパスルートダッシュ</h2>
             <p data-game-body>
-              検見川浜駅から海風を感じながら、千葉西高校まで向かうミニゲームです。
+              船橋日大前駅から日大理工キャンパスの緑の中を抜けて、千葉日大一中へ向かうミニゲームです。
             </p>
             <div class="game-scoreboard" aria-label="ゲームスコア">
               <div>
@@ -181,7 +186,7 @@
 
     <footer class="site-footer">
       <p>
-        <span data-school-name-short-footer>千葉西高校</span> /
+        <span data-school-name-short-footer>千葉日大一中</span> /
         AIとGitHub Pagesで作る即興Web制作デモ
       </p>
     </footer>

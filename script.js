@@ -1,88 +1,88 @@
 const siteData = {
-  schoolName: "千葉県立千葉西高等学校",
-  shortName: "千葉西高校",
-  area: "海に近い、検見川浜のそばの全日制普通科",
-  tagline: "生徒が教えてくれた千葉西のよさ。それは「海が近い」こと。",
+  schoolName: "千葉日本大学第一中学校",
+  shortName: "千葉日大一中",
+  area: "緑豊かな習志野台にある、日本大学の特別付属校",
+  tagline: "校訓は「真・健・和」。まっ直ぐに、すこやかに、なごやかに。",
   theme: {
-    brand: "#0077b6",
-    accent: "#f07167",
-    mint: "#2ec4b6",
+    brand: "#d6336c",
+    accent: "#f0654f",
+    mint: "#3f9e63",
     gold: "#f7b801",
-    sand: "#f4dfb8"
+    sand: "#f2e8d9"
   },
   stats: [
-    { value: "海近く", label: "生徒の推しポイント" },
-    { value: "飛翔", label: "校訓" },
-    { value: "徒歩15分", label: "検見川浜駅から" }
+    { value: "真・健・和", label: "校訓" },
+    { value: "徒歩12分", label: "船橋日大前駅から" },
+    { value: "習陵祭", label: "体育祭と文化祭" }
   ],
   features: [
     {
       symbol: "01",
-      title: "毎日に海がある",
-      body: "生徒が教えてくれた千葉西高校のよさは「海が近い」こと。海を身近に感じられる環境が、学校の印象をひらいてくれます。"
+      title: "緑あふれるキャンパス",
+      body: "日本大学理工学部の船橋キャンパスに隣接。並木道を通り抜けて通学する、緑に囲まれた学び舎です。"
     },
     {
       symbol: "02",
-      title: "校訓は「飛翔」",
-      body: "教育目標は自立した生徒の育成。自ら学び、考え、失敗を恐れず挑戦する姿勢を大切にしています。"
+      title: "校訓は「真・健・和」",
+      body: "まっ直ぐな気持ちで真理を探究し、心身ともに健やかに、互いを尊重して協力しあう人を育てます。"
     },
     {
       symbol: "03",
-      title: "高大連携と進路学習",
-      body: "千葉大学や神田外語大学との連携、キャリア教育を通して、将来を考えるきっかけを広げます。"
+      title: "中高大がつながる6年間",
+      body: "日本大学の特別付属校として、中学・高校の6年間から大学まで見通せる学びの環境があります。"
     }
   ],
   learning: {
-    title: "自立と挑戦を育てる、千葉西の学び。",
-    body: "朝の読書活動、大学との連携、地域との交流を通して、自分で考え行動する力を育てます。",
-    activities: ["朝読書", "高大連携", "地域交流"]
+    title: "6年間でじっくり育てる、千葉日大一中の学び。",
+    body: "中高一貫だからできる、基礎から積み上げる学習。日本大学との連携で、将来の学びにも早くから触れられます。",
+    activities: ["中高一貫", "日大連携", "習陵祭"]
   },
   voices: [
     {
-      initial: "海",
-      name: "生徒が教えてくれたよさ",
-      role: "海が近い",
-      quote: "千葉西高校のよさとして、生徒から「海が近い」という声がありました。学校紹介の中心にしたい一言です。"
+      initial: "真",
+      name: "校訓",
+      role: "真・健・和",
+      quote: "「まっ直ぐに、すこやかに、なごやかに」。3つの言葉が、毎日の学校生活の合言葉です。"
     },
     {
-      initial: "B",
-      name: "学校生活",
-      role: "部活動",
-      quote: "運動部・文化部の活動を通して、自主性や責任感、仲間との連帯感を育てます。"
+      initial: "部",
+      name: "部活動",
+      role: "運動部・文化部",
+      quote: "運動部・文化部あわせて30以上。中学から高校まで、打ち込めるものがきっと見つかります。"
     },
     {
-      initial: "C",
-      name: "進路学習",
-      role: "進路学習",
-      quote: "高大連携や進路講演会を通して、大学や将来の学びを具体的に考えられます。"
+      initial: "祭",
+      name: "行事",
+      role: "習陵祭",
+      quote: "体育祭と文化祭をあわせて「習陵祭」。中学生と高校生がいっしょに盛り上げる行事です。"
     }
   ],
   events: [
     {
       month: "4月",
       title: "入学式・新年度の始まり",
-      body: "新しい学年が始まり、千葉西での学校生活が動き出します。"
+      body: "新しい学年が始まり、千葉日大一中での6年間の学校生活が動き出します。"
     },
     {
-      month: "5月",
-      title: "校外学習",
-      body: "学年ごとに校外へ出かけ、仲間との関係を深めながら学校外で学びます。"
+      month: "6月",
+      title: "体育祭（習陵祭）",
+      body: "クラスの団結が試される体育祭。仲間と力を合わせて競い合います。"
     },
     {
-      month: "夏",
-      title: "学校説明会・部活動見学",
-      body: "中学生に向けて学校説明会が行われ、さまざまな部活動の見学機会があります。"
+      month: "11月",
+      title: "文化祭（習陵祭）",
+      body: "クラス展示や文化部の発表など、学校中が一年でいちばん華やぐ2日間です。"
     }
   ],
   game: {
-    title: "海風ルートダッシュ",
-    body: "検見川浜駅から海風を感じながら、千葉西高校まで向かうミニゲームです。",
+    title: "キャンパスルートダッシュ",
+    body: "船橋日大前駅から日大理工キャンパスの緑の中を抜けて、千葉日大一中へ向かうミニゲームです。",
     playerLabel: "AI",
-    startLabel: "検見川浜駅",
-    goalLabel: "千葉西高校",
-    routeNote: "JR京葉線 検見川浜駅から徒歩15分",
-    routeItems: ["海風", "飛翔", "高大連携", "部活動"],
-    obstacles: ["信号", "向かい風", "寄り道"]
+    startLabel: "船橋日大前駅",
+    goalLabel: "千葉日大一中",
+    routeNote: "東葉高速線 船橋日大前駅から徒歩12分",
+    routeItems: ["真", "健", "和", "習陵祭"],
+    obstacles: ["信号", "忘れ物", "寄り道"]
   }
 };
 
@@ -112,7 +112,7 @@ textBindings.forEach(([selector, value]) => {
   });
 });
 
-document.title = `${siteData.shortName} | AIと作る高校紹介サイト`;
+document.title = `${siteData.shortName} | AIと作る学校紹介サイト`;
 
 siteData.stats.forEach((stat, index) => {
   const value = document.querySelector(`[data-stat-value="${index}"]`);
@@ -274,49 +274,44 @@ function drawClouds(ctx, width, height, t, pointerX) {
 
 function drawGround(ctx, width, height) {
   const horizonY = height * 0.56;
-  const beachY = height * 0.76;
+  const lawnY = height * 0.76;
 
-  const sea = ctx.createLinearGradient(0, horizonY, 0, beachY);
-  sea.addColorStop(0, "#84d9f2");
-  sea.addColorStop(0.56, "#2ec4b6");
-  sea.addColorStop(1, "#d8f7ee");
-  ctx.fillStyle = sea;
-  ctx.fillRect(0, horizonY, width, beachY - horizonY);
+  const grove = ctx.createLinearGradient(0, horizonY, 0, lawnY);
+  grove.addColorStop(0, "#a9dcae");
+  grove.addColorStop(0.56, "#57b26b");
+  grove.addColorStop(1, "#def2d0");
+  ctx.fillStyle = grove;
+  ctx.fillRect(0, horizonY, width, lawnY - horizonY);
 
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.78)";
-  ctx.lineWidth = 3;
-  for (let y = horizonY + 24; y < beachY - 12; y += 34) {
-    ctx.beginPath();
-    for (let x = -20; x <= width + 20; x += 28) {
-      const waveY = y + Math.sin((x + y) * 0.025) * 4;
-      if (x === -20) {
-        ctx.moveTo(x, waveY);
-      } else {
-        ctx.lineTo(x, waveY);
-      }
+  ctx.fillStyle = "rgba(40, 120, 74, 0.32)";
+  for (let y = horizonY + 22; y < lawnY - 12; y += 34) {
+    for (let x = 8; x <= width + 20; x += 58) {
+      const treeX = x + ((y * 7) % 29);
+      ctx.beginPath();
+      ctx.arc(treeX, y, 13, 0, Math.PI * 2);
+      ctx.fill();
     }
-    ctx.stroke();
   }
 
-  const sand = ctx.createLinearGradient(0, beachY, 0, height);
-  sand.addColorStop(0, "#fff0c8");
-  sand.addColorStop(1, siteData.theme.sand);
-  ctx.fillStyle = sand;
-  ctx.fillRect(0, beachY, width, height - beachY);
+  const path = ctx.createLinearGradient(0, lawnY, 0, height);
+  path.addColorStop(0, "#faf3e2");
+  path.addColorStop(1, siteData.theme.sand);
+  ctx.fillStyle = path;
+  ctx.fillRect(0, lawnY, width, height - lawnY);
 
   ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
   ctx.beginPath();
-  ctx.moveTo(0, beachY + 4);
+  ctx.moveTo(0, lawnY + 4);
   for (let x = 0; x <= width + 20; x += 36) {
-    ctx.quadraticCurveTo(x + 18, beachY + 17, x + 36, beachY + 5);
+    ctx.quadraticCurveTo(x + 18, lawnY + 17, x + 36, lawnY + 5);
   }
-  ctx.lineTo(width, beachY + 32);
-  ctx.lineTo(0, beachY + 32);
+  ctx.lineTo(width, lawnY + 32);
+  ctx.lineTo(0, lawnY + 32);
   ctx.closePath();
   ctx.fill();
 
-  ctx.fillStyle = "rgba(0, 119, 182, 0.12)";
-  ctx.fillRect(0, beachY + 50, width, 5);
+  ctx.fillStyle = "rgba(63, 158, 99, 0.16)";
+  ctx.fillRect(0, lawnY + 50, width, 5);
 }
 
 function drawCampus(ctx, width, height, pointer) {
@@ -368,7 +363,7 @@ function drawCampus(ctx, width, height, pointer) {
   ctx.font = `900 ${Math.max(13, buildingW * 0.032)}px system-ui, sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText("千葉西高校", left + buildingW * 0.5, y + buildingH * 0.12);
+  ctx.fillText("千葉日大一中", left + buildingW * 0.5, y + buildingH * 0.12);
 
   drawTree(ctx, left - 70, baseY + 4, 1.2);
   drawTree(ctx, left + buildingW + 62, baseY + 8, 1.05);
@@ -608,7 +603,7 @@ function drawGame(ctx, canvas, state) {
   ctx.lineTo(canvas.width, state.ground);
   ctx.stroke();
 
-  ctx.fillStyle = "rgba(0, 119, 182, 0.18)";
+  ctx.fillStyle = "rgba(63, 158, 99, 0.22)";
   ctx.fillRect(0, state.ground + 70, canvas.width, 34);
   for (let x = -60; x < canvas.width + 80; x += 46) {
     const waveX = x - ((state.frame * 0.55) % 46);
@@ -672,7 +667,7 @@ function drawRouteBackground(ctx, canvas, state) {
     ctx.fill();
   }
 
-  ctx.fillStyle = "rgba(46, 196, 182, 0.28)";
+  ctx.fillStyle = "rgba(63, 158, 99, 0.28)";
   roundRect(ctx, 36, 204, 120, 56, 8);
   ctx.fill();
   ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
@@ -688,11 +683,11 @@ function drawRouteBackground(ctx, canvas, state) {
     ctx.fill();
   }
 
-  ctx.fillStyle = "rgba(0, 119, 182, 0.72)";
-  ctx.font = "900 16px system-ui, sans-serif";
+  ctx.fillStyle = "rgba(63, 158, 99, 0.85)";
+  ctx.font = "900 15px system-ui, sans-serif";
   ctx.textAlign = "left";
   ctx.textBaseline = "alphabetic";
-  ctx.fillText("海風", 42, 190);
+  ctx.fillText("船橋日大前", 42, 190);
 }
 
 function drawRouteProgress(ctx, canvas, state) {

@@ -473,17 +473,17 @@ h3 {
   color: rgba(247, 251, 255, 0.76);
 }
 
-.sea-voice-section {
+.spirit-section {
   color: #fff;
   background:
-    linear-gradient(135deg, rgba(0, 119, 182, 0.95), rgba(46, 196, 182, 0.88)),
-    #0077b6;
+    linear-gradient(135deg, rgba(178, 31, 84, 0.95), rgba(63, 158, 99, 0.88)),
+    #d6336c;
   overflow: hidden;
   position: relative;
 }
 
-.sea-voice-section::before,
-.sea-voice-section::after {
+.spirit-section::before,
+.spirit-section::after {
   position: absolute;
   left: -5%;
   width: 110%;
@@ -494,17 +494,17 @@ h3 {
   pointer-events: none;
 }
 
-.sea-voice-section::before {
+.spirit-section::before {
   top: 0;
   opacity: 0.5;
 }
 
-.sea-voice-section::after {
+.spirit-section::after {
   bottom: -48px;
   opacity: 0.7;
 }
 
-.sea-voice-layout {
+.spirit-layout {
   position: relative;
   z-index: 1;
   display: grid;
@@ -513,11 +513,11 @@ h3 {
   align-items: center;
 }
 
-.sea-voice-section .eyebrow {
+.spirit-section .eyebrow {
   color: var(--sand);
 }
 
-.sea-quote {
+.spirit-quote {
   margin: 0;
   padding: clamp(24px, 4vw, 44px);
   background: rgba(255, 255, 255, 0.14);
@@ -525,14 +525,14 @@ h3 {
   border-radius: 8px;
 }
 
-.sea-quote p {
+.spirit-quote p {
   margin: 0;
   font-size: clamp(3.2rem, 8vw, 7rem);
   font-weight: 950;
   line-height: 0.95;
 }
 
-.sea-quote cite {
+.spirit-quote cite {
   display: block;
   margin-top: 20px;
   color: rgba(255, 255, 255, 0.82);
@@ -578,7 +578,7 @@ h3 {
 }
 
 .game-section {
-  background: #f0fbff;
+  background: #f1faf2;
 }
 
 .game-layout {
@@ -687,7 +687,7 @@ h3 {
   .feature-grid,
   .voice-grid,
   .split-layout,
-  .sea-voice-layout,
+  .spirit-layout,
   .station-layout,
   .game-layout {
     grid-template-columns: 1fr;
