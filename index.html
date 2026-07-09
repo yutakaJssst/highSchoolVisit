@@ -8,7 +8,7 @@
       content="出張講義でAIと一緒に即興で作る、GitHub Pages対応の学校紹介Webサイト。"
     />
     <title>AIと作る学校紹介サイト</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=photos" />
   </head>
   <body>
     <header class="site-header" aria-label="サイトヘッダー">
@@ -18,6 +18,7 @@
       </a>
       <nav class="main-nav" aria-label="メインナビゲーション">
         <a href="#features">魅力</a>
+        <a href="#photos">写真</a>
         <a href="#spirit">校訓</a>
         <a href="#voices">生活</a>
         <a href="#events">行事</a>
@@ -64,6 +65,76 @@
             <h2 id="features-title">千葉日大一中の魅力は、緑のキャンパスから始まる。</h2>
           </div>
           <div class="feature-grid" data-feature-grid></div>
+        </div>
+      </section>
+
+      <section id="photos" class="section photo-section" aria-labelledby="photos-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Real Photos</p>
+            <h2 id="photos-title">本物のキャンパスを写真で見てみよう。</h2>
+            <p class="photo-intro">
+              校舎の光の道や実験室など、千葉日大一中の学びの環境を公式サイトの写真で紹介します。
+            </p>
+          </div>
+          <div class="photo-grid">
+            <figure class="photo-card">
+              <img
+                src="assets/photos/chiba-nichidai-exterior.jpg"
+                alt="千葉日本大学第一中学校の校舎外観"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <strong>新校舎外観</strong>
+                <span>中学棟・高校棟</span>
+              </figcaption>
+            </figure>
+            <figure class="photo-card">
+              <img
+                src="assets/photos/chiba-nichidai-light-path.jpg"
+                alt="千葉日本大学第一中学校の校舎の間を通る光の道"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <strong>光の道</strong>
+                <span>校訓「真・健・和」を象徴する空間</span>
+              </figcaption>
+            </figure>
+            <figure class="photo-card">
+              <img
+                src="assets/photos/chiba-nichidai-science-room.jpg"
+                alt="千葉日本大学第一中学校の理科実験室"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <strong>理科実験室</strong>
+                <span>サイエンスプラザ</span>
+              </figcaption>
+            </figure>
+            <figure class="photo-card">
+              <img
+                src="assets/photos/chiba-nichidai-computer-room.jpg"
+                alt="千葉日本大学第一中学校のコンピュータールーム"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <strong>コンピュータールーム</strong>
+                <span>情報の授業で使われる学習空間</span>
+              </figcaption>
+            </figure>
+          </div>
+          <p class="photo-credit">
+            写真出典：<a
+              href="https://www.chibanichi.ed.jp/facility/facility01/"
+              target="_blank"
+              rel="noreferrer"
+              >千葉日本大学第一中学・高等学校 公式サイト「中学棟・高校棟」</a
+              >（デモ掲載）
+          </p>
         </div>
       </section>
 
