@@ -75,14 +75,20 @@ const siteData = {
     }
   ],
   game: {
-    title: "キャンパスルートダッシュ",
-    body: "船橋日大前駅から日大理工キャンパスの緑の中を抜けて、千葉日大一中へ向かうミニゲームです。",
+    title: "キャンパスルート＆食堂チャレンジ",
+    body: "船橋日大前駅から日大理工キャンパスの緑の中を抜けて、千葉日大一中へ向かうミニゲームです。道中の敵をジャンプで避けよう。",
     playerLabel: "AI",
     startLabel: "船橋日大前駅",
     goalLabel: "千葉日大一中",
     routeNote: "東葉高速線 船橋日大前駅から徒歩12分",
     routeItems: ["真", "健", "和", "習陵祭"],
-    obstacles: ["信号", "忘れ物", "寄り道"]
+    obstacles: ["信号", "忘れ物", "寄り道"],
+    cafeteria: {
+      body: "学校に着いたら食堂タイムアタック！トレイをドラッグして、メニューと友だちをできるだけ集めよう。",
+      timeLimit: 12,
+      menuItems: ["からあげ丼", "ラーメン", "カレー", "うどん", "パン"],
+      friendLabel: "友だち"
+    }
   }
 };
 
@@ -103,7 +109,8 @@ const textBindings = [
   ["[data-learning-title]", siteData.learning.title],
   ["[data-learning-body]", siteData.learning.body],
   ["[data-game-title]", siteData.game.title],
-  ["[data-game-body]", siteData.game.body]
+  ["[data-game-body]", siteData.game.body],
+  ["[data-cafeteria-body]", siteData.game.cafeteria.body]
 ];
 
 textBindings.forEach(([selector, value]) => {
@@ -418,9 +425,13 @@ function initGame() {
   const jumpButton = document.querySelector("[data-jump]");
   const scoreElement = document.querySelector("[data-score]");
   const bestElement = document.querySelector("[data-best-score]");
+  const menuCountElement = document.querySelector("[data-menu-count]");
+  const friendCountElement = document.querySelector("[data-friend-count]");
   const bestKey = "high-school-visit-route-best-score";
+  const cafeteriaTotalTime = Math.round(siteData.game.cafeteria.timeLimit * 60);
 
   const state = {
+    phase: "route",
     running: false,
     gameOver: false,
     arrived: false,
@@ -440,12 +451,25 @@ function initGame() {
       grounded: true
     },
     obstacles: [],
-    collectibles: []
+    collectibles: [],
+    cafeteria: {
+      transition: 0,
+      totalTime: cafeteriaTotalTime,
+      timeLeft: 0,
+      spawnTimer: 0,
+      itemsSpawned: 0,
+      items: [],
+      menuCount: 0,
+      friendCount: 0,
+      playerX: canvas.width / 2,
+      targetX: canvas.width / 2
+    }
   };
 
   bestElement.textContent = state.best;
 
   const reset = () => {
+    state.phase = "route";
     state.running = true;
     state.gameOver = false;
     state.arrived = false;
@@ -458,15 +482,29 @@ function initGame() {
     state.player.y = state.ground - state.player.height;
     state.player.velocityY = 0;
     state.player.grounded = true;
+    state.cafeteria.transition = 0;
+    state.cafeteria.timeLeft = 0;
+    state.cafeteria.spawnTimer = 0;
+    state.cafeteria.itemsSpawned = 0;
+    state.cafeteria.items = [];
+    state.cafeteria.menuCount = 0;
+    state.cafeteria.friendCount = 0;
+    state.cafeteria.playerX = canvas.width / 2;
+    state.cafeteria.targetX = canvas.width / 2;
     startButton.textContent = "リスタート";
+    jumpButton.hidden = false;
     scoreElement.textContent = state.score;
+    menuCountElement.textContent = 0;
+    friendCountElement.textContent = 0;
   };
 
   const jump = () => {
-    if (!state.running || state.gameOver || state.arrived) {
+    if (!state.running) {
       reset();
       return;
     }
+
+    if (state.phase !== "route" || state.gameOver) return;
 
     if (state.player.grounded) {
       state.player.velocityY = -14.4;
@@ -474,13 +512,34 @@ function initGame() {
     }
   };
 
+  const moveTrayTo = (clientX) => {
+    if (state.phase !== "cafeteria") return;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const x = (clientX - rect.left) * scaleX;
+    state.cafeteria.targetX = clamp(x, 60, canvas.width - 60);
+  };
+
   startButton.addEventListener("click", reset);
   jumpButton.addEventListener("click", jump);
-  canvas.addEventListener("pointerdown", jump);
+  canvas.addEventListener("pointerdown", (event) => {
+    jump();
+    moveTrayTo(event.clientX);
+  });
+  canvas.addEventListener("pointermove", (event) => {
+    if (event.pressure === 0 && event.pointerType === "mouse") return;
+    moveTrayTo(event.clientX);
+  });
   window.addEventListener("keydown", (event) => {
     if (event.key === " " || event.key === "ArrowUp") {
       event.preventDefault();
       jump();
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      if (state.phase === "cafeteria" && state.running) {
+        event.preventDefault();
+        const dir = event.key === "ArrowLeft" ? -1 : 1;
+        state.cafeteria.targetX = clamp(state.cafeteria.targetX + dir * 46, 60, canvas.width - 60);
+      }
     }
   });
 
@@ -494,7 +553,16 @@ function initGame() {
   requestAnimationFrame(loop);
 
   function updateGame(game) {
-    if (!game.running || game.gameOver) return;
+    if (!game.running) return;
+    if (game.phase === "route") {
+      updateRoute(game);
+    } else if (game.phase === "cafeteria") {
+      updateCafeteria(game);
+    }
+  }
+
+  function updateRoute(game) {
+    if (game.gameOver) return;
 
     game.frame += 1;
     game.score += 1;
@@ -556,6 +624,61 @@ function initGame() {
     game.collectibles = game.collectibles.filter((item) => item.x > -80 && !item.collected);
   }
 
+  function updateCafeteria(game) {
+    const cafe = game.cafeteria;
+
+    if (cafe.transition > 0) {
+      cafe.transition -= 1;
+      return;
+    }
+
+    cafe.timeLeft -= 1;
+    if (cafe.timeLeft <= 0) {
+      finishCafeteria(game);
+      return;
+    }
+
+    cafe.playerX += (cafe.targetX - cafe.playerX) * 0.22;
+
+    cafe.spawnTimer -= 1;
+    if (cafe.spawnTimer <= 0) {
+      const isFriend = Math.random() < 0.4;
+      cafe.items.push({
+        x: 70 + Math.random() * (canvas.width - 140),
+        y: -20,
+        vy: 2.8 + Math.random() * 1.6,
+        type: isFriend ? "friend" : "menu",
+        label: isFriend
+          ? siteData.game.cafeteria.friendLabel
+          : pick(siteData.game.cafeteria.menuItems, cafe.itemsSpawned),
+        caught: false
+      });
+      cafe.itemsSpawned += 1;
+      cafe.spawnTimer = 32 + Math.random() * 18;
+    }
+
+    const trayTop = game.ground - 40;
+    cafe.items.forEach((item) => {
+      item.y += item.vy;
+      if (!item.caught && item.y >= trayTop && item.y <= game.ground && Math.abs(item.x - cafe.playerX) < 46) {
+        item.caught = true;
+        if (item.type === "friend") {
+          cafe.friendCount += 1;
+          game.score += 60;
+        } else {
+          cafe.menuCount += 1;
+          game.score += 40;
+        }
+      }
+    });
+
+    cafe.items = cafe.items.filter((item) => !item.caught && item.y < game.ground + 40);
+
+    scoreElement.textContent = Math.floor(game.score / 6);
+    menuCountElement.textContent = cafe.menuCount;
+    friendCountElement.textContent = cafe.friendCount;
+  }
+
   function endGame(game) {
     game.gameOver = true;
     game.running = false;
@@ -569,16 +692,32 @@ function initGame() {
 
   function arriveGame(game) {
     game.arrived = true;
-    game.running = false;
+    game.phase = "cafeteria";
     game.score += 240;
+    game.cafeteria.transition = 60;
+    game.cafeteria.timeLeft = game.cafeteria.totalTime;
+    game.cafeteria.spawnTimer = 30;
+    game.cafeteria.itemsSpawned = 0;
+    game.cafeteria.items = [];
+    game.cafeteria.menuCount = 0;
+    game.cafeteria.friendCount = 0;
+    game.cafeteria.playerX = canvas.width / 2;
+    game.cafeteria.targetX = canvas.width / 2;
+    jumpButton.hidden = true;
+    scoreElement.textContent = Math.floor(game.score / 6);
+  }
+
+  function finishCafeteria(game) {
+    game.running = false;
+    game.phase = "results";
     const finalScore = Math.floor(game.score / 6);
-    scoreElement.textContent = finalScore;
     if (finalScore > game.best) {
       game.best = finalScore;
       localStorage.setItem(bestKey, String(game.best));
       bestElement.textContent = game.best;
     }
   }
+
 }
 
 function drawGame(ctx, canvas, state) {
@@ -590,6 +729,26 @@ function drawGame(ctx, canvas, state) {
   ctx.fillStyle = sky;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  if (state.phase === "cafeteria" || state.phase === "results") {
+    drawCafeteria(ctx, canvas, state);
+  } else {
+    drawRoute(ctx, canvas, state);
+  }
+
+  if (state.phase === "route" && !state.running && !state.gameOver) {
+    drawCenterLabel(ctx, canvas, "START");
+  }
+
+  if (state.gameOver) {
+    drawCenterLabel(ctx, canvas, "RETRY");
+  }
+
+  if (state.phase === "results") {
+    drawResults(ctx, canvas, state);
+  }
+}
+
+function drawRoute(ctx, canvas, state) {
   drawRouteBackground(ctx, canvas, state);
   drawRouteProgress(ctx, canvas, state);
 
@@ -636,27 +795,133 @@ function drawGame(ctx, canvas, state) {
   });
 
   state.obstacles.forEach((obstacle) => {
-    ctx.fillStyle = siteData.theme.accent;
-    roundRect(ctx, obstacle.x, obstacle.y, obstacle.width, obstacle.height, 8);
-    ctx.fill();
-    ctx.fillStyle = "#fff";
-    ctx.font = "900 12px system-ui, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("!", obstacle.x + obstacle.width / 2, obstacle.y + 14);
-    ctx.font = "800 10px system-ui, sans-serif";
-    ctx.fillText(obstacle.label, obstacle.x + obstacle.width / 2, obstacle.y + 30);
+    drawEnemy(ctx, obstacle);
   });
 
   drawPlayer(ctx, state.player);
+}
 
-  if (!state.running && !state.gameOver) {
-    drawCenterLabel(ctx, canvas, state.arrived ? "ARRIVED" : "START");
-  }
+function drawEnemy(ctx, obstacle) {
+  const cx = obstacle.x + obstacle.width / 2;
+  const cy = obstacle.y + obstacle.height / 2;
 
-  if (state.gameOver) {
-    drawCenterLabel(ctx, canvas, "RETRY");
+  ctx.fillStyle = siteData.theme.accent;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, obstacle.width / 2, obstacle.height / 2, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#fff";
+  ctx.beginPath();
+  ctx.arc(cx - 8, cy - 4, 6, 0, Math.PI * 2);
+  ctx.arc(cx + 8, cy - 4, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#172033";
+  ctx.beginPath();
+  ctx.arc(cx - 8, cy - 2, 2.6, 0, Math.PI * 2);
+  ctx.arc(cx + 8, cy - 2, 2.6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = "#172033";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(cx, cy + 6, 6, 0, Math.PI);
+  ctx.stroke();
+
+  ctx.fillStyle = "#172033";
+  ctx.font = "800 10px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText(obstacle.label, cx, obstacle.y - 6);
+}
+
+function drawCafeteria(ctx, canvas, state) {
+  const cafe = state.cafeteria;
+
+  ctx.fillStyle = "rgba(247, 184, 1, 0.16)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = siteData.theme.sand;
+  ctx.fillRect(0, state.ground, canvas.width, canvas.height - state.ground);
+  ctx.strokeStyle = "rgba(23, 32, 51, 0.18)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(0, state.ground);
+  ctx.lineTo(canvas.width, state.ground);
+  ctx.stroke();
+
+  cafe.items.forEach((item) => {
+    ctx.fillStyle = item.type === "friend" ? siteData.theme.mint : siteData.theme.gold;
+    ctx.beginPath();
+    ctx.arc(item.x, item.y, 20, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#172033";
+    ctx.font = "900 12px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(item.type === "friend" ? "友" : "食", item.x, item.y + 1);
+    ctx.font = "800 10px system-ui, sans-serif";
+    ctx.fillText(item.label, item.x, item.y - 28);
+  });
+
+  const trayWidth = 60;
+  const trayHeight = 40;
+  const trayX = cafe.playerX - trayWidth / 2;
+  const trayY = state.ground - trayHeight;
+  ctx.fillStyle = siteData.theme.brand;
+  roundRect(ctx, trayX, trayY, trayWidth, trayHeight, 10);
+  ctx.fill();
+  ctx.fillStyle = "#fff";
+  ctx.font = "900 12px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("TRAY", cafe.playerX, trayY + trayHeight / 2);
+
+  const barX = 58;
+  const barWidth = canvas.width - 116;
+  const timeRatio = clamp(cafe.timeLeft / cafe.totalTime, 0, 1);
+  ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
+  roundRect(ctx, barX, 24, barWidth, 20, 10);
+  ctx.fill();
+  ctx.fillStyle = siteData.theme.accent;
+  roundRect(ctx, barX, 24, barWidth * timeRatio, 20, 10);
+  ctx.fill();
+  ctx.fillStyle = "#172033";
+  ctx.font = "800 12px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(`のこり ${Math.ceil(clamp(cafe.timeLeft, 0, cafe.totalTime) / 60)}秒`, canvas.width / 2, 34);
+
+  if (cafe.transition > 0) {
+    drawCenterLabel(ctx, canvas, "食堂に到着!");
   }
+}
+
+function drawResults(ctx, canvas, state) {
+  const cafe = state.cafeteria;
+  ctx.fillStyle = "rgba(255, 255, 255, 0.94)";
+  roundRect(ctx, canvas.width / 2 - 150, canvas.height / 2 - 92, 300, 184, 12);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(23, 32, 51, 0.16)";
+  ctx.stroke();
+
+  ctx.fillStyle = "#172033";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "900 20px system-ui, sans-serif";
+  ctx.fillText("けっか発表！", canvas.width / 2, canvas.height / 2 - 56);
+
+  ctx.font = "800 15px system-ui, sans-serif";
+  ctx.fillText(`メニュー ${cafe.menuCount}種類`, canvas.width / 2, canvas.height / 2 - 20);
+  ctx.fillText(`友だち ${cafe.friendCount}人`, canvas.width / 2, canvas.height / 2 + 8);
+
+  ctx.font = "900 18px system-ui, sans-serif";
+  ctx.fillStyle = siteData.theme.brand;
+  ctx.fillText(`スコア ${Math.floor(state.score / 6)}`, canvas.width / 2, canvas.height / 2 + 42);
+
+  ctx.font = "700 11px system-ui, sans-serif";
+  ctx.fillStyle = "#5e6878";
+  ctx.fillText("タップでもう一度", canvas.width / 2, canvas.height / 2 + 68);
 }
 
 function drawRouteBackground(ctx, canvas, state) {
