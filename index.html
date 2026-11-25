@@ -8,7 +8,13 @@
       content="出張講義でAIと一緒に即興で作る、GitHub Pages対応の学校紹介Webサイト。"
     />
     <title>AIと作る学校紹介サイト</title>
-    <link rel="stylesheet" href="styles.css?v=takatsu" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css?v=20261203" />
   </head>
   <body>
     <header class="site-header" aria-label="サイトヘッダー">
@@ -22,58 +28,66 @@
         <a href="#spirit">3つの力</a>
         <a href="#voices">生活</a>
         <a href="#events">行事</a>
-        <a href="#game">ゲーム</a>
+        <a class="nav-cta" href="#game">ゲーム</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <canvas id="campusCanvas" class="hero-canvas" aria-hidden="true"></canvas>
-        <div class="hero-shade" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="eyebrow" data-school-area>溝の口駅から徒歩7分。多摩川の流れる川崎市高津区の市立高校</p>
-          <h1 id="hero-title" data-school-name>川崎市立高津高等学校</h1>
-          <p class="hero-lead" data-school-tagline>
-            2028年、創立100周年。「生徒が主役の学校」で、学ぶ・自律する・実践する。
-          </p>
-          <div class="hero-actions" aria-label="主要リンク">
-            <a class="button primary" href="#features">魅力を見る</a>
-            <a class="button ghost" href="#game">ゲームで体験</a>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="pill" data-school-area>溝の口駅から徒歩7分。多摩川の流れる川崎市高津区の市立高校</p>
+            <h1 id="hero-title" data-school-name>川崎市立高津高等学校</h1>
+            <p class="hero-lead" data-school-tagline>
+              2028年、創立100周年。「生徒が主役の学校」で、学ぶ・自律する・実践する。
+            </p>
+            <div class="hero-actions" aria-label="主要リンク">
+              <a class="button primary" href="#features">魅力を見る</a>
+              <a class="button ghost" href="#game">ゲームで体験</a>
+            </div>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <img
+            src="assets/photos/takatsu-school-sakura.jpg"
+            alt="桜の咲く高津高校の校舎"
+            decoding="async"
+          />
+          <figcaption>春の高津高校（公式サイトのトップ画像より）</figcaption>
+        </figure>
+
+        <div class="quick-stats" aria-label="学校の特徴">
+          <div class="stat">
+            <span class="stat-value" data-stat-value="0">100周年</span>
+            <span class="stat-label" data-stat-label="0">2028年に創立100年</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-stat-value="1">徒歩7分</span>
+            <span class="stat-label" data-stat-label="1">溝の口駅から</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-stat-value="2">積木祭</span>
+            <span class="stat-label" data-stat-label="2">体育の部と文化の部</span>
           </div>
         </div>
       </section>
 
-      <section class="quick-stats" aria-label="学校の特徴">
-        <div class="stat">
-          <span class="stat-value" data-stat-value="0">100周年</span>
-          <span class="stat-label" data-stat-label="0">2028年に創立100年</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value" data-stat-value="1">徒歩7分</span>
-          <span class="stat-label" data-stat-label="1">溝の口駅から</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value" data-stat-value="2">積木祭</span>
-          <span class="stat-label" data-stat-label="2">体育の部と文化の部</span>
-        </div>
-      </section>
-
-      <section id="features" class="section band-light" aria-labelledby="features-title">
+      <section id="features" class="section tint" aria-labelledby="features-title">
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">School Highlights</p>
-            <h2 id="features-title">100年目の高津高校、ここが自慢。</h2>
+            <h2 id="features-title">100周年へ向かう高津高校、ここが自慢。</h2>
           </div>
           <div class="feature-grid" data-feature-grid></div>
         </div>
       </section>
 
-      <section id="photos" class="section photo-section" aria-labelledby="photos-title">
+      <section id="photos" class="section" aria-labelledby="photos-title">
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">Real Photos</p>
             <h2 id="photos-title">本物の高津高校を写真で見てみよう。</h2>
-            <p class="photo-intro">
+            <p class="section-lead">
               積木祭のステージ、食堂「あさひ」、部活動、地域のゴミ拾い。高津高校の毎日を公式サイトの写真で紹介します。
             </p>
           </div>
@@ -133,30 +147,32 @@
               target="_blank"
               rel="noreferrer"
               >川崎市立高津高等学校（全日制） 公式サイト</a
-              >（デモ掲載）
+            >（デモ掲載）
           </p>
         </div>
       </section>
 
-      <section id="spirit" class="section spirit-section" aria-labelledby="spirit-title">
-        <div class="section-inner spirit-layout">
-          <div>
+      <section id="spirit" class="section dark spirit-section" aria-labelledby="spirit-title">
+        <div class="section-inner">
+          <div class="section-heading">
             <p class="eyebrow">Three Powers</p>
             <h2 id="spirit-title">高津高校の3つの力</h2>
+            <p class="section-lead">「生徒が主役の学校」で育てる、未来に羽ばたくための3つの力。</p>
           </div>
-          <blockquote class="spirit-quote">
-            <p>学ぶ力<br />自律する力<br />実践する力</p>
-            <cite>「生徒が主役の学校」で育てる、未来に羽ばたくための3つの力。</cite>
-          </blockquote>
+          <div class="spirit-words">
+            <div class="spirit-word"><span>01</span><strong>学ぶ力</strong></div>
+            <div class="spirit-word"><span>02</span><strong>自律する力</strong></div>
+            <div class="spirit-word"><span>03</span><strong>実践する力</strong></div>
+          </div>
         </div>
       </section>
 
-      <section class="section split-band" aria-labelledby="learning-title">
+      <section id="learning" class="section" aria-labelledby="learning-title">
         <div class="section-inner split-layout">
           <div>
             <p class="eyebrow">Learning Style</p>
             <h2 id="learning-title" data-learning-title>100年目に向かう、高津高校の学び。</h2>
-            <p data-learning-body>
+            <p class="section-lead" data-learning-body>
               1人1台のタブレットPCで、調べる・まとめる・ふり返る。学んだことは探究発表会や地域の活動で、社会の中で使ってみます。
             </p>
           </div>
@@ -177,7 +193,7 @@
         </div>
       </section>
 
-      <section id="voices" class="section" aria-labelledby="voices-title">
+      <section id="voices" class="section tint" aria-labelledby="voices-title">
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">School Life</p>
@@ -187,7 +203,7 @@
         </div>
       </section>
 
-      <section id="events" class="section band-ink" aria-labelledby="events-title">
+      <section id="events" class="section dark" aria-labelledby="events-title">
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">Events</p>
@@ -197,52 +213,42 @@
         </div>
       </section>
 
-      <section class="section station-section" aria-labelledby="station-title">
-        <div class="section-inner station-layout">
+      <section id="access" class="section" aria-labelledby="station-title">
+        <div class="section-inner split-layout">
           <div>
             <p class="eyebrow">Route Start</p>
             <h2 id="station-title">通学路は溝の口駅から。</h2>
-            <p>
-              JR南武線の武蔵溝ノ口駅、東急田園都市線の溝の口駅から高津高校までは徒歩約7分。
-              自転車で通う生徒もたくさんいます。次のゲームでは、溝の口駅をスタート地点にして
-              学校までの道のりをたどります。
+            <p class="section-lead">
+              JR南武線の武蔵溝ノ口駅、東急田園都市線の溝の口駅から高津高校までは徒歩約7分。自転車で通う生徒もたくさんいます。次のゲームでは、溝の口駅をスタート地点にして学校までの道のりをたどります。
             </p>
-            <div class="activity-board" aria-label="アクセス">
-              <div class="activity-row">
-                <span>JR</span>
-                <strong>武蔵溝ノ口駅 徒歩7分</strong>
-              </div>
-              <div class="activity-row">
-                <span>東急</span>
-                <strong>溝の口駅 徒歩7分</strong>
-              </div>
-              <div class="activity-row">
-                <span>バス</span>
-                <strong>「高津高校前」バス停</strong>
-              </div>
-            </div>
           </div>
-          <figure class="station-photo">
-            <img
-              src="assets/photos/takatsu-school-sakura.jpg"
-              alt="桜の咲く高津高校の校舎"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>春の高津高校（公式サイトのトップ画像より）</figcaption>
-          </figure>
+          <ol class="route-card" aria-label="アクセス">
+            <li>
+              <span class="route-dot" aria-hidden="true"></span>
+              <div><strong>JR 武蔵溝ノ口駅／東急 溝の口駅</strong><span>スタート</span></div>
+            </li>
+            <li class="route-walk">
+              <span class="route-dot" aria-hidden="true"></span>
+              <div><strong>徒歩 約7分</strong><span>自転車通学の生徒も多い</span></div>
+            </li>
+            <li>
+              <span class="route-dot" aria-hidden="true"></span>
+              <div><strong>川崎市立高津高校</strong><span>バスなら「高津高校前」バス停</span></div>
+            </li>
+          </ol>
         </div>
       </section>
 
-      <section id="game" class="section game-section" aria-labelledby="game-title">
+      <section id="game" class="section tint game-section" aria-labelledby="game-title">
         <div class="section-inner game-layout">
           <div class="game-copy">
             <p class="eyebrow">Mini Game</p>
             <h2 id="game-title" data-game-title>溝の口ルートダッシュ</h2>
-            <p data-game-body>
+            <p class="section-lead" data-game-body>
               溝の口駅から高津高校まで、徒歩7分の通学路を走るミニゲームです。
             </p>
             <p class="game-subnote" data-cafeteria-body></p>
+            <ul class="game-rules" data-game-rules></ul>
             <div class="game-scoreboard" aria-label="ゲームスコア">
               <div>
                 <span>Score</span>
@@ -263,7 +269,13 @@
             </div>
           </div>
           <div class="game-panel">
-            <canvas id="gameCanvas" width="900" height="420" aria-label="溝の口ルートダッシュ"></canvas>
+            <canvas
+              id="gameCanvas"
+              width="900"
+              height="420"
+              tabindex="0"
+              aria-label="溝の口ルートダッシュ"
+            ></canvas>
             <div class="game-controls">
               <button class="button primary" type="button" data-start-game>スタート</button>
               <button class="button secondary" type="button" data-jump>ジャンプ</button>
@@ -281,6 +293,6 @@
       </p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20261203"></script>
   </body>
 </html>
