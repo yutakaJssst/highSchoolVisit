@@ -8,7 +8,7 @@
       content="出張講義でAIと一緒に即興で作る、GitHub Pages対応の学校紹介Webサイト。"
     />
     <title>AIと作る学校紹介サイト</title>
-    <link rel="stylesheet" href="styles.css?v=photos" />
+    <link rel="stylesheet" href="styles.css?v=takatsu" />
   </head>
   <body>
     <header class="site-header" aria-label="サイトヘッダー">
@@ -19,7 +19,7 @@
       <nav class="main-nav" aria-label="メインナビゲーション">
         <a href="#features">魅力</a>
         <a href="#photos">写真</a>
-        <a href="#spirit">校訓</a>
+        <a href="#spirit">3つの力</a>
         <a href="#voices">生活</a>
         <a href="#events">行事</a>
         <a href="#game">ゲーム</a>
@@ -31,10 +31,10 @@
         <canvas id="campusCanvas" class="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow" data-school-area>緑豊かな習志野台にある、日本大学の特別付属校</p>
-          <h1 id="hero-title" data-school-name>千葉日本大学第一中学校</h1>
+          <p class="eyebrow" data-school-area>溝の口駅から徒歩7分。多摩川の流れる川崎市高津区の市立高校</p>
+          <h1 id="hero-title" data-school-name>川崎市立高津高等学校</h1>
           <p class="hero-lead" data-school-tagline>
-            校訓は「真・健・和」。まっ直ぐに、すこやかに、なごやかに。
+            2028年、創立100周年。「生徒が主役の学校」で、学ぶ・自律する・実践する。
           </p>
           <div class="hero-actions" aria-label="主要リンク">
             <a class="button primary" href="#features">魅力を見る</a>
@@ -45,16 +45,16 @@
 
       <section class="quick-stats" aria-label="学校の特徴">
         <div class="stat">
-          <span class="stat-value" data-stat-value="0">真・健・和</span>
-          <span class="stat-label" data-stat-label="0">校訓</span>
+          <span class="stat-value" data-stat-value="0">100周年</span>
+          <span class="stat-label" data-stat-label="0">2028年に創立100年</span>
         </div>
         <div class="stat">
-          <span class="stat-value" data-stat-value="1">徒歩12分</span>
-          <span class="stat-label" data-stat-label="1">船橋日大前駅から</span>
+          <span class="stat-value" data-stat-value="1">徒歩7分</span>
+          <span class="stat-label" data-stat-label="1">溝の口駅から</span>
         </div>
         <div class="stat">
-          <span class="stat-value" data-stat-value="2">習陵祭</span>
-          <span class="stat-label" data-stat-label="2">体育祭と文化祭</span>
+          <span class="stat-value" data-stat-value="2">積木祭</span>
+          <span class="stat-label" data-stat-label="2">体育の部と文化の部</span>
         </div>
       </section>
 
@@ -62,7 +62,7 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">School Highlights</p>
-            <h2 id="features-title">千葉日大一中の魅力は、緑のキャンパスから始まる。</h2>
+            <h2 id="features-title">100年目の高津高校、ここが自慢。</h2>
           </div>
           <div class="feature-grid" data-feature-grid></div>
         </div>
@@ -72,80 +72,68 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">Real Photos</p>
-            <h2 id="photos-title">本物のキャンパスを写真で見てみよう。</h2>
+            <h2 id="photos-title">本物の高津高校を写真で見てみよう。</h2>
             <p class="photo-intro">
-              校舎の光の道や実験室など、千葉日大一中の学びの環境を公式サイトの写真で紹介します。
+              積木祭のステージ、食堂「あさひ」、部活動、地域のゴミ拾い。高津高校の毎日を公式サイトの写真で紹介します。
             </p>
           </div>
           <div class="photo-grid">
             <figure class="photo-card">
               <img
-                src="assets/photos/chiba-nichidai-exterior.jpg"
-                alt="千葉日本大学第一中学校の校舎外観"
+                src="assets/photos/takatsu-tsumikisai-stage.jpg"
+                alt="積木祭文化の部のステージ発表を見る生徒たち"
                 loading="lazy"
                 decoding="async"
               />
               <figcaption>
-                <strong>新校舎外観</strong>
-                <span>中学棟・高校棟</span>
+                <strong>積木祭 文化の部</strong>
+                <span>校舎前のステージが一番にぎわう日</span>
               </figcaption>
             </figure>
             <figure class="photo-card">
               <img
-                src="assets/photos/chiba-nichidai-light-path.jpg"
-                alt="千葉日本大学第一中学校の校舎の間を通る光の道"
+                src="assets/photos/takatsu-cafeteria-asahi.jpg"
+                alt="高津高校の食堂「あさひ」のカウンター"
                 loading="lazy"
                 decoding="async"
               />
               <figcaption>
-                <strong>光の道</strong>
-                <span>校訓「真・健・和」を象徴する空間</span>
+                <strong>食堂「あさひ」</strong>
+                <span>約170席・メニュー約88種類</span>
               </figcaption>
             </figure>
             <figure class="photo-card">
               <img
-                src="assets/photos/chiba-nichidai-science-room.jpg"
-                alt="千葉日本大学第一中学校の理科実験室"
+                src="assets/photos/takatsu-club-activities.jpg"
+                alt="体育館で部活動紹介をする生徒たち"
                 loading="lazy"
                 decoding="async"
               />
               <figcaption>
-                <strong>理科実験室</strong>
-                <span>サイエンスプラザ</span>
+                <strong>部活動</strong>
+                <span>運動部13・文化部12の計25団体</span>
               </figcaption>
             </figure>
             <figure class="photo-card">
               <img
-                src="assets/photos/chiba-nichidai-computer-room.jpg"
-                alt="千葉日本大学第一中学校のコンピュータールーム"
+                src="assets/photos/takatsu-clean-project.jpg"
+                alt="線路沿いの道でゴミ拾いをする生徒会の生徒"
                 loading="lazy"
                 decoding="async"
               />
               <figcaption>
-                <strong>コンピュータールーム</strong>
-                <span>情報の授業で使われる学習空間</span>
-              </figcaption>
-            </figure>
-            <figure class="photo-card">
-              <img
-                src="assets/photos/chiba-nichidai-rikou-visit.jpg"
-                alt="日本大学理工学部を訪問する生徒たち"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>
-                <strong>日大理工学部を訪問中！</strong>
-                <span>中高大がつながる6年間を、教室で体感しています</span>
+                <strong>TCP（タカツクリーンプロジェクト）</strong>
+                <span>毎月2回、学校のまわりをきれいに</span>
               </figcaption>
             </figure>
           </div>
           <p class="photo-credit">
             写真出典：<a
-              href="https://www.chibanichi.ed.jp/facility/facility01/"
+              href="https://kawasaki-edu.jp/5/takatsu-zen/"
               target="_blank"
               rel="noreferrer"
-              >千葉日本大学第一中学・高等学校 公式サイト「中学棟・高校棟」</a
-              >（デモ掲載）／理工学部訪問の写真は当日撮影
+              >川崎市立高津高等学校（全日制） 公式サイト</a
+              >（デモ掲載）
           </p>
         </div>
       </section>
@@ -153,12 +141,12 @@
       <section id="spirit" class="section spirit-section" aria-labelledby="spirit-title">
         <div class="section-inner spirit-layout">
           <div>
-            <p class="eyebrow">School Motto</p>
-            <h2 id="spirit-title">千葉日大一中の3つの言葉</h2>
+            <p class="eyebrow">Three Powers</p>
+            <h2 id="spirit-title">高津高校の3つの力</h2>
           </div>
           <blockquote class="spirit-quote">
-            <p>真・健・和</p>
-            <cite>まっ直ぐに、すこやかに、なごやかに。毎日の合言葉です。</cite>
+            <p>学ぶ力<br />自律する力<br />実践する力</p>
+            <cite>「生徒が主役の学校」で育てる、未来に羽ばたくための3つの力。</cite>
           </blockquote>
         </div>
       </section>
@@ -167,23 +155,23 @@
         <div class="section-inner split-layout">
           <div>
             <p class="eyebrow">Learning Style</p>
-            <h2 id="learning-title" data-learning-title>6年間でじっくり育てる、千葉日大一中の学び。</h2>
+            <h2 id="learning-title" data-learning-title>100年目に向かう、高津高校の学び。</h2>
             <p data-learning-body>
-              中高一貫だからできる、基礎から積み上げる学習。日本大学との連携で、将来の学びにも早くから触れられます。
+              1人1台のタブレットPCで、調べる・まとめる・ふり返る。学んだことは探究発表会や地域の活動で、社会の中で使ってみます。
             </p>
           </div>
           <div class="activity-board" aria-label="学びのテーマ">
             <div class="activity-row">
-              <span>学び</span>
-              <strong data-activity="0">中高一貫</strong>
+              <span>ICT</span>
+              <strong data-activity="0">1人1台タブレット</strong>
             </div>
             <div class="activity-row">
-              <span>連携</span>
-              <strong data-activity="1">日大連携</strong>
+              <span>探究</span>
+              <strong data-activity="1">市立高校探究発表会</strong>
             </div>
             <div class="activity-row">
-              <span>行事</span>
-              <strong data-activity="2">習陵祭</strong>
+              <span>地域</span>
+              <strong data-activity="2">地域のゴミ拾い TCP</strong>
             </div>
           </div>
         </div>
@@ -193,7 +181,7 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">School Life</p>
-            <h2 id="voices-title">千葉日大一中の学びと生活</h2>
+            <h2 id="voices-title">高津高校の学校生活</h2>
           </div>
           <div class="voice-grid" data-voice-grid></div>
         </div>
@@ -213,27 +201,36 @@
         <div class="section-inner station-layout">
           <div>
             <p class="eyebrow">Route Start</p>
-            <h2 id="station-title">通学路は船橋日大前駅から。</h2>
+            <h2 id="station-title">通学路は溝の口駅から。</h2>
             <p>
-              東葉高速線の船橋日大前駅から千葉日大一中までは徒歩約12分。日本大学理工学部の
-              キャンパスを通り抜ける、緑いっぱいの通学路です。次のゲームでは、この駅を
-              スタート地点にして学校までの道のりをたどります。
+              JR南武線の武蔵溝ノ口駅、東急田園都市線の溝の口駅から高津高校までは徒歩約7分。
+              自転車で通う生徒もたくさんいます。次のゲームでは、溝の口駅をスタート地点にして
+              学校までの道のりをたどります。
             </p>
+            <div class="activity-board" aria-label="アクセス">
+              <div class="activity-row">
+                <span>JR</span>
+                <strong>武蔵溝ノ口駅 徒歩7分</strong>
+              </div>
+              <div class="activity-row">
+                <span>東急</span>
+                <strong>溝の口駅 徒歩7分</strong>
+              </div>
+              <div class="activity-row">
+                <span>バス</span>
+                <strong>「高津高校前」バス停</strong>
+              </div>
+            </div>
           </div>
-          <div class="activity-board" aria-label="アクセス">
-            <div class="activity-row">
-              <span>電車</span>
-              <strong>船橋日大前駅から徒歩約12分</strong>
-            </div>
-            <div class="activity-row">
-              <span>電車</span>
-              <strong>習志野駅から徒歩約20分</strong>
-            </div>
-            <div class="activity-row">
-              <span>バス</span>
-              <strong>北習志野駅からバスも利用可</strong>
-            </div>
-          </div>
+          <figure class="station-photo">
+            <img
+              src="assets/photos/takatsu-school-sakura.jpg"
+              alt="桜の咲く高津高校の校舎"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>春の高津高校（公式サイトのトップ画像より）</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -241,13 +238,11 @@
         <div class="section-inner game-layout">
           <div class="game-copy">
             <p class="eyebrow">Mini Game</p>
-            <h2 id="game-title" data-game-title>キャンパスルートダッシュ</h2>
+            <h2 id="game-title" data-game-title>溝の口ルートダッシュ</h2>
             <p data-game-body>
-              船橋日大前駅から日大理工キャンパスの緑の中を抜けて、千葉日大一中へ向かうミニゲームです。
+              溝の口駅から高津高校まで、徒歩7分の通学路を走るミニゲームです。
             </p>
-            <p class="game-subnote" data-cafeteria-body>
-              学校に着いたら食堂タイムアタック！トレイをドラッグして、メニューと友だちをできるだけ集めよう。
-            </p>
+            <p class="game-subnote" data-cafeteria-body></p>
             <div class="game-scoreboard" aria-label="ゲームスコア">
               <div>
                 <span>Score</span>
@@ -257,23 +252,23 @@
                 <span>Best</span>
                 <strong data-best-score>0</strong>
               </div>
-              <div>
+              <div data-cafeteria-stat>
                 <span>メニュー</span>
                 <strong data-menu-count>0</strong>
               </div>
-              <div>
+              <div data-cafeteria-stat>
                 <span>友だち</span>
                 <strong data-friend-count>0</strong>
               </div>
             </div>
           </div>
           <div class="game-panel">
-            <canvas id="gameCanvas" width="900" height="420" aria-label="Campus Dash game"></canvas>
+            <canvas id="gameCanvas" width="900" height="420" aria-label="溝の口ルートダッシュ"></canvas>
             <div class="game-controls">
               <button class="button primary" type="button" data-start-game>スタート</button>
               <button class="button secondary" type="button" data-jump>ジャンプ</button>
             </div>
-            <p class="game-hint">通学路：タップ／スペースでジャンプ　食堂：ドラッグ・左右キーでトレイ移動</p>
+            <p class="game-hint" data-game-hint>タップ／スペースでジャンプ</p>
           </div>
         </div>
       </section>
@@ -281,7 +276,7 @@
 
     <footer class="site-footer">
       <p>
-        <span data-school-name-short-footer>千葉日大一中</span> /
+        <span data-school-name-short-footer>高津高校</span> /
         AIとGitHub Pagesで作る即興Web制作デモ
       </p>
     </footer>

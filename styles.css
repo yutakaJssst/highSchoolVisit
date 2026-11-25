@@ -486,6 +486,12 @@ h3 {
   font-weight: 950;
 }
 
+.voice-meta .avatar {
+  display: inline-grid;
+  color: #fff;
+  font-size: 1rem;
+}
+
 .voice-card:nth-child(2) .avatar {
   background: var(--accent);
 }
@@ -587,7 +593,7 @@ h3 {
 
 .spirit-quote p {
   margin: 0;
-  font-size: clamp(3.2rem, 8vw, 7rem);
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
   font-weight: 950;
   line-height: 0.95;
 }
@@ -614,6 +620,14 @@ h3 {
 .station-layout p {
   margin: 12px 0 0;
   color: var(--muted);
+}
+
+.station-layout .activity-board {
+  margin-top: 22px;
+}
+
+.station-layout .activity-row strong {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
 }
 
 .station-photo {
@@ -821,4 +835,8 @@ h3 {
   .activity-row {
     grid-template-columns: 1fr;
   }
+}
+
+[hidden] {
+  display: none !important;
 }

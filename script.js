@@ -1,92 +1,94 @@
 const siteData = {
-  schoolName: "千葉日本大学第一中学校",
-  shortName: "千葉日大一中",
-  area: "緑豊かな習志野台にある、日本大学の特別付属校",
-  tagline: "校訓は「真・健・和」。まっ直ぐに、すこやかに、なごやかに。",
+  schoolName: "川崎市立高津高等学校",
+  shortName: "高津高校",
+  area: "溝の口駅から徒歩7分。多摩川の流れる川崎市高津区の市立高校",
+  tagline: "2028年、創立100周年。「生徒が主役の学校」で、学ぶ・自律する・実践する。",
   theme: {
-    brand: "#d6336c",
-    accent: "#f0654f",
+    brand: "#d94f7c",
+    accent: "#2f86c8",
     mint: "#3f9e63",
     gold: "#f7b801",
-    sand: "#f2e8d9"
+    sand: "#f6ece6"
   },
   stats: [
-    { value: "真・健・和", label: "校訓" },
-    { value: "徒歩12分", label: "船橋日大前駅から" },
-    { value: "習陵祭", label: "体育祭と文化祭" }
+    { value: "100周年", label: "2028年に創立100年" },
+    { value: "徒歩7分", label: "溝の口駅から" },
+    { value: "積木祭", label: "体育の部と文化の部" }
   ],
   features: [
     {
       symbol: "01",
-      title: "本がたくさんの図書室",
-      body: "蔵書が豊富な図書室。読みたい本がきっと見つかる、静かに集中できる学びの場所です。"
+      title: "生徒が主役の学校",
+      body: "教育の柱は「学ぶ力」「自律する力」「実践する力」。行事も部活動も委員会も、生徒が中心になって動かします。"
     },
     {
       symbol: "02",
-      title: "人工芝グラウンドでのびのび運動",
-      body: "人工芝のグラウンドは足腰への負担が少なく、体育も部活動も思いきり体を動かせます。"
+      title: "メニュー約88種類の食堂「あさひ」",
+      body: "約170席の食堂には、ラーメン・うどん・丼もの・揚げたてのホットスナックまで。昼休みは生徒でいっぱいです。"
     },
     {
       symbol: "03",
-      title: "メニュー豊富な食堂",
-      body: "食堂には日替わりでいろいろなメニューが並び、毎日の楽しみのひとつになっています。"
+      title: "25の部活動と全国2位の放送",
+      body: "運動部13・文化部12。視聴覚委員会（放送）は全国高校総合文化祭で文化庁長官賞（全国2位）を受賞しました。"
     }
   ],
   learning: {
-    title: "6年間でじっくり育てる、千葉日大一中の学び。",
-    body: "中高一貫だからできる、基礎から積み上げる学習。日本大学との連携で、将来の学びにも早くから触れられます。",
-    activities: ["中高一貫", "日大連携", "習陵祭"]
+    title: "100年目に向かう、高津高校の学び。",
+    body: "1人1台のタブレットPCで、調べる・まとめる・ふり返る。学んだことは探究発表会や地域の活動で、社会の中で使ってみます。",
+    activities: ["1人1台タブレット", "市立高校探究発表会", "地域のゴミ拾い TCP"]
   },
   voices: [
     {
-      initial: "図",
-      name: "在校生",
-      role: "図書室",
-      quote: "図書室の本がとにかく多くて、読みたい本がいつも見つかります。"
-    },
-    {
-      initial: "芝",
-      name: "在校生",
-      role: "グラウンド",
-      quote: "グラウンドが人工芝になって、すごく運動しやすくなりました。"
-    },
-    {
       initial: "食",
-      name: "在校生",
-      role: "食堂",
-      quote: "食堂のメニューが多くて、毎日どれにしようか迷うくらいです。"
+      name: "公式サイトより",
+      role: "食堂「あさひ」",
+      quote: "麺類も丼ものも、揚げ物も出来立て。オリジナルバーガーまであって、高津高校生の昼食を支えています。"
+    },
+    {
+      initial: "放",
+      name: "公式サイトより",
+      role: "視聴覚委員会（放送）",
+      quote: "体育祭のアナウンスや文化祭の公開放送も担当。アナウンサーや声優を目指す人がたくさんいます。"
+    },
+    {
+      initial: "T",
+      name: "公式サイトより",
+      role: "生徒会 TCP",
+      quote: "毎月2回、放課後に学校のまわりのゴミ拾い。自分たちの街を、自分たちの手でよくしよう！"
     }
   ],
   events: [
     {
-      month: "4月",
-      title: "入学式・新年度の始まり",
-      body: "新しい学年が始まり、千葉日大一中での6年間の学校生活が動き出します。"
+      month: "5月",
+      title: "積木祭 体育の部（体育祭）",
+      body: "桃・赤・橙・黄・緑・青・紫の7ブロック対抗。大縄跳び、台風の目、ムカデリレー、応援合戦で盛り上がります。"
     },
     {
-      month: "6月",
-      title: "体育祭（習陵祭）",
-      body: "クラスの団結が試される体育祭。仲間と力を合わせて競い合います。"
+      month: "9月",
+      title: "積木祭 文化の部（文化祭）",
+      body: "クラス展示、部活動のステージ発表、公開放送。一般公開で、校舎も体育館もにぎわう一日です。"
     },
     {
-      month: "11月",
-      title: "文化祭（習陵祭）",
-      body: "クラス展示や文化部の発表など、学校中が一年でいちばん華やぐ2日間です。"
+      month: "10月",
+      title: "2年生 修学旅行",
+      body: "2年生がいちばん楽しみにしている行事。今年の行き先と思い出は、2年生のみんなに教えてもらおう。"
     }
   ],
   game: {
-    title: "キャンパスルート＆食堂チャレンジ",
-    body: "船橋日大前駅から日大理工キャンパスの緑の中を抜けて、千葉日大一中へ向かうミニゲームです。道中の敵をジャンプで避けよう。",
+    title: "溝の口ルートダッシュ",
+    body: "溝の口駅から高津高校まで、徒歩7分の通学路を走るミニゲームです。「3つの力」と「積木」を集めながら、じゃまものをジャンプでかわそう。",
     playerLabel: "AI",
-    startLabel: "船橋日大前駅",
-    goalLabel: "千葉日大一中",
-    routeNote: "東葉高速線 船橋日大前駅から徒歩12分",
-    routeItems: ["真", "健", "和", "習陵祭"],
-    obstacles: ["信号", "忘れ物", "寄り道"],
+    startLabel: "溝の口駅",
+    goalLabel: "高津高校",
+    routeNote: "JR南武線・東急田園都市線 溝の口駅から徒歩7分",
+    routeItems: ["学ぶ力", "自律", "実践", "積木"],
+    obstacles: ["信号", "人ごみ", "忘れ物"],
+    finishTitle: "高津高校に到着！",
     cafeteria: {
-      body: "学校に着いたら食堂タイムアタック！トレイをドラッグして、メニューと友だちをできるだけ集めよう。",
+      enabled: false,
+      body: "学校に着いたら食堂「あさひ」タイムアタック！トレイをドラッグして、メニューと友だちをできるだけ集めよう。",
       timeLimit: 12,
-      menuItems: ["からあげ丼", "ラーメン", "カレー", "うどん", "パン"],
+      menuItems: ["からあげ丼", "しょうゆラーメン", "カレーライス", "かつ丼", "たこ焼", "オリジナルバーガー"],
       friendLabel: "友だち"
     }
   }
@@ -110,7 +112,7 @@ const textBindings = [
   ["[data-learning-body]", siteData.learning.body],
   ["[data-game-title]", siteData.game.title],
   ["[data-game-body]", siteData.game.body],
-  ["[data-cafeteria-body]", siteData.game.cafeteria.body]
+  ["[data-cafeteria-body]", siteData.game.cafeteria.enabled ? siteData.game.cafeteria.body : ""]
 ];
 
 textBindings.forEach(([selector, value]) => {
@@ -120,6 +122,13 @@ textBindings.forEach(([selector, value]) => {
 });
 
 document.title = `${siteData.shortName} | AIと作る学校紹介サイト`;
+
+document.querySelectorAll("[data-cafeteria-stat]").forEach((element) => {
+  element.hidden = !siteData.game.cafeteria.enabled;
+});
+document.querySelector("[data-game-hint]").textContent = siteData.game.cafeteria.enabled
+  ? "通学路：タップ／スペースでジャンプ　食堂：ドラッグ・左右キーでトレイ移動"
+  : "タップ／スペースでジャンプ";
 
 siteData.stats.forEach((stat, index) => {
   const value = document.querySelector(`[data-stat-value="${index}"]`);
@@ -370,7 +379,7 @@ function drawCampus(ctx, width, height, pointer) {
   ctx.font = `900 ${Math.max(13, buildingW * 0.032)}px system-ui, sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText("千葉日大一中", left + buildingW * 0.5, y + buildingH * 0.12);
+  ctx.fillText(siteData.shortName, left + buildingW * 0.5, y + buildingH * 0.12);
 
   drawTree(ctx, left - 70, baseY + 4, 1.2);
   drawTree(ctx, left + buildingW + 62, baseY + 8, 1.05);
@@ -692,6 +701,20 @@ function initGame() {
 
   function arriveGame(game) {
     game.arrived = true;
+    if (!siteData.game.cafeteria.enabled) {
+      game.score += 240;
+      game.running = false;
+      game.phase = "arrived";
+      jumpButton.hidden = true;
+      const finalScore = Math.floor(game.score / 6);
+      scoreElement.textContent = finalScore;
+      if (finalScore > game.best) {
+        game.best = finalScore;
+        localStorage.setItem(bestKey, String(game.best));
+        bestElement.textContent = game.best;
+      }
+      return;
+    }
     game.phase = "cafeteria";
     game.score += 240;
     game.cafeteria.transition = 60;
@@ -746,6 +769,33 @@ function drawGame(ctx, canvas, state) {
   if (state.phase === "results") {
     drawResults(ctx, canvas, state);
   }
+
+  if (state.phase === "arrived") {
+    drawArrival(ctx, canvas, state);
+  }
+}
+
+function drawArrival(ctx, canvas, state) {
+  ctx.fillStyle = "rgba(255, 255, 255, 0.94)";
+  roundRect(ctx, canvas.width / 2 - 160, canvas.height / 2 - 70, 320, 140, 12);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(23, 32, 51, 0.16)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#172033";
+  ctx.font = "900 22px system-ui, sans-serif";
+  ctx.fillText(siteData.game.finishTitle, canvas.width / 2, canvas.height / 2 - 30);
+
+  ctx.font = "900 18px system-ui, sans-serif";
+  ctx.fillStyle = siteData.theme.brand;
+  ctx.fillText(`スコア ${Math.floor(state.score / 6)}`, canvas.width / 2, canvas.height / 2 + 6);
+
+  ctx.font = "700 11px system-ui, sans-serif";
+  ctx.fillStyle = "#5e6878";
+  ctx.fillText("タップでもう一度", canvas.width / 2, canvas.height / 2 + 40);
 }
 
 function drawRoute(ctx, canvas, state) {
@@ -952,7 +1002,7 @@ function drawRouteBackground(ctx, canvas, state) {
   ctx.font = "900 15px system-ui, sans-serif";
   ctx.textAlign = "left";
   ctx.textBaseline = "alphabetic";
-  ctx.fillText("船橋日大前", 42, 190);
+  ctx.fillText(siteData.game.startLabel, 42, 190);
 }
 
 function drawRouteProgress(ctx, canvas, state) {
